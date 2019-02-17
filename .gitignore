@@ -2,4 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/src/AspNetCoreWidgets/AspNetCoreWidgets/obj
+/src/AspNetCoreWidgets/obj
+/src/AspNetCoreWidgets/bin
+#/src/AspNetCoreWidgets/wwwroot/lib
+*.user
+/src/.vs
