@@ -41,7 +41,7 @@ namespace AspNetCoreWidgets.ViewComponents
         }
         private static IViewComponentResult ReturnErrorView(ViewComponent vc)
         {
-            return vc.View("Error");
+            return vc.View("../_WidgetError");
         }
     }
 }
