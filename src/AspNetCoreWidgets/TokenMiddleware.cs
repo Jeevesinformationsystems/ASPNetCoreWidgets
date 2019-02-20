@@ -40,45 +40,20 @@ namespace AspNetCoreWidgets
         /// <returns>returns the task.</returns>
         public async Task InvokeAsync(HttpContext context)
         {
-
-            // calls the next middlware to execute.
-            //try
+            try
             {
                 await _next(context);
             }
-           // catch (Exception e) when (e.GetType()==typeof(NotImplementedException))
+            catch (Exception e) when (e.GetType() == typeof(NotImplementedException))
             {
                 //Server Exceptions
                 //Difficult string manipulations of request path then call next once again
 
             }
-            //catch(Exception e)
+            catch (Exception e)
             {
                 //eApproval exceptons
             }
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private static bool IsUnauthorized(HttpStatusCode statusCode) =>
-            statusCode == HttpStatusCode.Unauthorized || statusCode == HttpStatusCode.Forbidden;
-        private static void RedirectToLogin(HttpContext context)
-        {
-
-            var returnUrl = $"{context.Request.PathBase.Value}{HttpUtility.HtmlEncode(context.Request.Path.Value)}";
-            if (returnUrl.Contains("Logout", StringComparison.InvariantCultureIgnoreCase))
-                returnUrl = $"{context.Request.PathBase.Value}/";
-
-            // Redirect to the Login view, supplying the returnURL specified in the original request.
-            context.Response.Redirect($"{context.Request.PathBase.Value}/Account/Login?returnUrl={returnUrl}");
-
-        }
-
-        private static void RedirectToHome(HttpContext context)
-        {
-            context.Response.Redirect($"{context.Request.PathBase.Value}/");
         }
 
         #endregion

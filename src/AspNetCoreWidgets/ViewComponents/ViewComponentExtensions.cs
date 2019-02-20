@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace AspNetCoreWidgets.ViewComponents
@@ -13,7 +14,7 @@ namespace AspNetCoreWidgets.ViewComponents
             {
                 return view();
             }
-            catch
+            catch (Exception e) when (!(e.GetType() == typeof(Refit.ApiException) && IsUnauthorized(((Refit.ApiException)e).StatusCode)))
             {
                 return ReturnErrorView(vc);
             }
@@ -28,7 +29,7 @@ namespace AspNetCoreWidgets.ViewComponents
             {
                 return await view();
             }
-            catch
+            catch (Exception e) when (!(e.GetType() == typeof(Refit.ApiException) && IsUnauthorized(((Refit.ApiException)e).StatusCode)))
             {
                 return ReturnErrorView(vc);
             }
@@ -39,9 +40,11 @@ namespace AspNetCoreWidgets.ViewComponents
         {
             vc.ViewData["VC"] = vc.ViewComponentContext.ViewComponentDescriptor.ShortName;
         }
-        private static IViewComponentResult ReturnErrorView(ViewComponent vc)
-        {
-            return vc.View("../_WidgetError");
-        }
+
+        private static IViewComponentResult ReturnErrorView(ViewComponent vc) => vc.View("../_WidgetError");
+        
+        private static bool IsUnauthorized(HttpStatusCode statusCode) => 
+            statusCode == HttpStatusCode.Unauthorized || statusCode == HttpStatusCode.Forbidden;
+
     }
 }

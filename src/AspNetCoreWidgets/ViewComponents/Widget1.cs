@@ -6,13 +6,11 @@ namespace AspNetCoreWidgets.ViewComponents
     [ViewComponent]
     public class Widget1 : ViewComponent
     {
-        public Task<IViewComponentResult> InvokeAsync()
-        {
-            return this.ErrorViewAsync(async () =>
+        public Task<IViewComponentResult> InvokeAsync() =>
+            this.ErrorViewAsync(async () =>
             {
                 await Task.Delay(0); // Simulating async
                 return View();
             });
-        }
     }
 }

@@ -1,15 +1,9 @@
-﻿using AspNetCoreWidgets.Filters;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreWidgets.Controllers
 {
-    //[CustomException]
     public class WidgetsController : Controller
     {
-        public IActionResult Index(string id)
-        {
-            return ViewComponent(id);
-        }
+        public IActionResult Index(string id) => ViewComponent(id);
     }
 }

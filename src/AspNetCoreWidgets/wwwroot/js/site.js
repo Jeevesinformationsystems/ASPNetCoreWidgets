@@ -6,7 +6,7 @@
 $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
     if (jqxhr.status === 500) {
         //Internal server error. Display popup with OK button.  
-        alert();
+        var problemDetail = JSON.parse(jqxhr.responseText);
     } else if (jqxhr.status === 401) {
         //Redirect to login page.    
     } else if (jqxhr.status === 400) {
