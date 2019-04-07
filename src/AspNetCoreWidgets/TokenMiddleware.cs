@@ -50,7 +50,7 @@ namespace AspNetCoreWidgets
                 //Difficult string manipulations of request path then call next once again
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //eApproval exceptons
             }
